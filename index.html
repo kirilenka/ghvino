@@ -6,7 +6,6 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>In Vino Veritas</title>
-    <link rel="stylesheet" href="./assets/css/swiper.min.css">
     <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
@@ -66,52 +65,15 @@
 
         <section class="section section-winery" id="wine">
             <div class="section-header">
-                <i class="grape-red vico-grape"></i>
+                <i data-action="choose-grape" data-grape="red" class="grape-small red vico-grape"></i>
+                <img data-action="choose-grape" data-grape="red" src="./assets/img/redgrapes.png" alt="red grapes" class="grape-big red">
                 <h2 class="section-title">Винный погреб</h2>
-                <i class="grape-white vico-grape-alt"></i>
+                <i data-action="choose-grape" data-grape="white" class="grape-small white vico-grape-alt"></i>
+                <img data-action="choose-grape" data-grape="white" src="./assets/img/whitegrapes.png" alt="red grapes" class="grape-big white">
             </div>
             <!-- /.section-title -->
 
-            <div class="wine">
-                <h4 class="wine__title area-title">
-                    Вино Sauska, "Cuvee 7"
-                </h4>
-                <div class="wine__param area-ratio">
-                    <i class="ico vico-vivino"></i>
-                    <span class="param">4,1 баллов</span>
-                </div>
-                <div class="wine__param area-price-g">
-                    <i class="ico vico-wine-glass"></i>
-                    <span class="param">0,25 л. / 650 ₽</span>
-                </div>
-                <div class="wine__param area-price-b">
-                    <i class="ico vico-wine-bottle"></i>
-                    <span class="param">0,75 л. / 6500 ₽</span>
-                </div>
-                <div class="wine__param area-grapes">
-                    <i class="ico vico-grapes"></i>
-                    <div class="grapes-list">
-                        <span>Мерло: 47%</span>
-                        <span>Каберне Совиньон: 25%</span>
-                        <span>Каберне Фран: 18%</span>
-                        <span>Сира: 10%</span>
-                    </div>
-                </div>
-                <div class="wine__image area-image">
-                    <img src="./assets/img/wines/sauska.png" alt="" class="wine__img">
-                </div>
-                <div class="wine__props area-props">
-                    <span>Вино: Красное, сухое</span>
-                    <span>Регион: Венгрия, Виллань</span>
-                    <span>Производитель: Sauska</span>
-                    <span>Год: 2009</span>
-                    <span>Крепость: 15%</span>
-                </div>
-                <div class="wine__text area-text">
-                    Насыщенный тёмно-вишнёвый цвет. Аромат прелой листвы, дыма и вишнёвого корня. Вкус очень мягкий и
-                    бархатистый с вареньем из ежевики и горьковатым привкусом. Длинное послевкусие с лавровым листом
-                </div>
-            </div>
+            <div id="wineBlock"></div>
         </section>
         <!-- /.section -->
 
@@ -211,7 +173,53 @@
 </footer>
 <!-- /.footer -->
 
-<script src="./assets/js/swiper.min.js"></script>
+<!-- /#hb-template-wine -->
+<script id="hb-template-wine" type="text/x-handlebars-template">
+
+    <div class="wine">
+        <svg class="arrow left" xmlns="http://www.w3.org/2000/svg" width="83" height="44" viewBox="0 0 83 44"
+             fill="none">
+            <path d="M82.5 31C65.7 52.1-6 48.5 16.5 1M1 14.5L16.5 1 19 18" stroke="black"/>
+        </svg>
+        <svg class="arrow right" xmlns="http://www.w3.org/2000/svg" width="83" height="44" viewBox="0 0 83 44"
+             fill="none">
+            <path d="M82.5 31C65.7 52.1-6 48.5 16.5 1M1 14.5L16.5 1 19 18" stroke="black"/>
+        </svg>
+
+        <h4 class="wine__title area-title">{{title}}</h4>
+        <div class="wine__param area-ratio">
+            <i class="ico vico-vivino"></i>
+            <span class="param">{{ratio}}</span>
+        </div>
+        <div class="wine__param area-price-g">
+            <i class="ico vico-wine-glass"></i>
+            <span class="param">{{price.glass}}</span>
+        </div>
+        <div class="wine__param area-price-b">
+            <i class="ico vico-wine-bottle"></i>
+            <span class="param">{{price.bottle}}</span>
+        </div>
+        <div class="wine__param area-grapes">
+            <i class="ico vico-grapes"></i>
+            <div class="grapes-list">
+                {{#each grapes}}
+                    <span>{{this.title}}: {{this.percent}}%</span>
+                {{/each}}
+            </div>
+        </div>
+        <div class="wine__image area-image">
+            <img src="./assets/img/wines/{{image}}" alt="" class="wine__img">
+        </div>
+        <div class="wine__props area-props">
+            {{#each properties}}
+                <span>{{this.prop}}: {{this.value}}</span>
+            {{/each}}
+        </div>
+        <div class="wine__text area-text">{{{text}}}</div>
+    </div>
+</script>
+<!-- /#hb-template-wine -->
+
 <script src="./assets/js/handlebars.min.js"></script>
 <script src="./assets/js/index.js"></script>
 </body>
